@@ -4,16 +4,14 @@ import TaskItem from "@/components/taskItem";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 
-export default function App() {
+const Calendar = () => {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
             <HeadItem />
-            <DateItem />
-            <TaskItem />
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -22,3 +20,5 @@ const styles = StyleSheet.create({
         fontFamily: "Pretendard",
     },
 });
+
+export default Calendar;
