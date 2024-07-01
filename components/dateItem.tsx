@@ -28,7 +28,8 @@ const DateItem = () => {
     const year = currentTime.getFullYear();
 
     const hours = currentTime.getHours();
-    const minutes = currentTime.toLocaleString("en-US", { minute: "2-digit" });
+    const minutes = currentTime.toLocaleString("ko-KR", { minute: "2-digit" });
+    const formattedMinutes = minutes.toString().padStart(2, "0");
     const displayHours = hours % 12 === 0 ? 12 : hours % 12;
     const ampm = hours < 12 ? "AM" : "PM";
 
@@ -47,7 +48,7 @@ const DateItem = () => {
                         {displayHours.toLocaleString("en-US", {
                             minimumIntegerDigits: 2,
                         })}
-                        :{minutes} {ampm}
+                        :{formattedMinutes} {ampm}
                     </Text>
                     <Text style={styles.region}>SEOUL</Text>
                 </View>

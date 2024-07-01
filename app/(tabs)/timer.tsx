@@ -1,3 +1,4 @@
+import StopModal from "@/components/stopModal";
 import { useEffect, useRef, useState } from "react";
 import {
     ImageBackground,
@@ -11,33 +12,58 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 const image = { uri: "./assets/images/bg.jpg" };
 
 const Timer = () => {
-    const [timer, setTimer] = useState(25 * 60);
+    const [timer, setTimer] = useState(1500);
     const [active, setActive] = useState(false);
+    const [pause, setPause] = useState(false);
+    const [modal, setModal] = useState(false);
     const [task, setTask] = useState("");
-    const decrement = useRef(null);
+    const decrement = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
-        if (timer === 0) {
+        if (timer === 0 && decrement.current !== null) {
             clearInterval(decrement.current);
+            decrement.current = null;
             setActive(false);
+            setPause(false);
         }
     }, [timer]);
 
     const handleStart = () => {
-        if (!active) {
+        if (!active && !pause) {
             decrement.current = setInterval(() => {
                 setTimer((prev) => prev - 1);
             }, 1000);
-        } else {
+            setActive(true);
+        } else if (decrement.current !== null) {
             clearInterval(decrement.current);
+            setActive(false);
+            setPause(true);
         }
-        setActive(!active);
+    };
+
+    const handleContinue = () => {
+        decrement.current = setInterval(() => {
+            setTimer((prev) => prev - 1);
+        }, 1000);
+        setActive(true);
+        setPause(false);
+    };
+
+    const handleStop = () => {
+        if (decrement.current !== null) {
+            clearInterval(decrement.current);
+            decrement.current = null;
+        }
+        setTimer(1500);
+        setActive(false);
+        setPause(false);
+        setModal(false);
     };
 
     const formatTime = () => {
         const getSeconds = `0${timer % 60}`.slice(-2);
-        const minutes = `${Math.floor(timer / 60)}`;
-        const getMinutes = `0${minutes % 60}`.slice(-2);
+        const minutes = Math.floor(timer / 60);
+        const getMinutes = `0${minutes}`.slice(-2);
 
         return `${getMinutes}:${getSeconds}`;
     };
@@ -55,21 +81,51 @@ const Timer = () => {
                 <View style={styles.timerView}>
                     <Text style={styles.time}>{formatTime()}</Text>
                 </View>
-                <TouchableOpacity onPress={handleStart} style={styles.btnView}>
-                    <Text style={styles.buttonText}>
-                        {!active ? "집중 시작하기" : "일시정지"}
-                    </Text>
-                </TouchableOpacity>
-                {/* {!active && (
-                    <View>
-                        <TouchableOpacity>
-                            <Text>계속</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity>
-                            <Text>정지</Text>
-                        </TouchableOpacity>
-                    </View>
-                )} */}
+                {!active && !pause ? (
+                    <TouchableOpacity
+                        onPress={handleStart}
+                        style={styles.btnStartView}
+                    >
+                        <Text style={styles.btnText}>시작하기</Text>
+                    </TouchableOpacity>
+                ) : (
+                    <>
+                        {active ? (
+                            <TouchableOpacity
+                                onPress={handleStart}
+                                style={styles.btnStopView}
+                            >
+                                <Text style={[styles.btnText, styles.btnStop]}>
+                                    일시정지
+                                </Text>
+                            </TouchableOpacity>
+                        ) : (
+                            <View style={styles.btnBox}>
+                                <TouchableOpacity
+                                    style={[styles.btnStartView, styles.btnPad]}
+                                    onPress={handleContinue}
+                                >
+                                    <Text style={styles.btnText}>계속</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    style={[styles.btnStopView, styles.btnPad]}
+                                    onPress={() => setModal(true)}
+                                >
+                                    <Text
+                                        style={[styles.btnText, styles.btnStop]}
+                                    >
+                                        정지
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>
+                        )}
+                    </>
+                )}
+                <StopModal
+                    visible={modal}
+                    onCancel={() => setModal(false)}
+                    onStop={handleStop}
+                />
             </ImageBackground>
         </View>
     );
@@ -106,15 +162,34 @@ const styles = StyleSheet.create({
         color: "#ffffff",
         fontWeight: 100,
     },
-    btnView: {
+    btnStartView: {
         backgroundColor: "#ffffff",
         paddingHorizontal: 24,
-        paddingVertical: 16,
+        paddingVertical: 14,
         borderRadius: 30,
+        borderWidth: 1,
+        borderColor: "#ffffff",
     },
-    buttonText: {
+    btnStopView: {
+        paddingHorizontal: 24,
+        paddingVertical: 14,
+        borderRadius: 30,
+        borderWidth: 1,
+        borderColor: "#ffffff",
+    },
+    btnText: {
         fontSize: 16,
         fontWeight: 600,
+    },
+    btnStop: {
+        color: "#ffffff",
+    },
+    btnBox: {
+        flexDirection: "row",
+        gap: 20,
+    },
+    btnPad: {
+        paddingHorizontal: 30,
     },
 });
 
