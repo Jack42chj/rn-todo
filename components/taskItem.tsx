@@ -4,7 +4,7 @@ const TaskItem = () => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Todays Task</Text>
-            <ScrollView style={styles.task}>
+            <ScrollView>
                 <View style={styles.item}></View>
                 <View style={styles.item}></View>
                 <View style={styles.item}></View>
@@ -16,7 +16,7 @@ const TaskItem = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 2.5,
-        backgroundColor: "#f5f5f5",
+        backgroundColor: "#ffffff",
         borderTopLeftRadius: 40,
         borderTopRightRadius: 40,
         paddingHorizontal: 10,
@@ -28,14 +28,11 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 500,
     },
-    task: {
-        gap: 40,
-    },
     item: {
         height: 180,
         backgroundColor: "#D9D9D9",
         borderRadius: 20,
-        marginBottom: 10,
+        marginBottom: 5,
     },
 });
 

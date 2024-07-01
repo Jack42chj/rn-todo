@@ -1,14 +1,14 @@
-import DateItem from "@/components/dateItem";
-import HeadItem from "@/components/headItem";
-import TaskItem from "@/components/taskItem";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
+import HeadItem from "@/components/headItem";
+import CalanderItem from "@/components/calanderItem";
 
 const Calendar = () => {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
             <HeadItem />
+            <CalanderItem />
         </View>
     );
 };

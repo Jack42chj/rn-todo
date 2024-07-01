@@ -1,53 +1,72 @@
-import { useRouter } from "expo-router";
-import { useState } from "react";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { useRouter, useSegments } from "expo-router";
+import { useEffect, useState } from "react";
+import { Text, View, StyleSheet, Pressable } from "react-native";
 
 const HeadItem = () => {
     const router = useRouter();
     const [isToday, setToday] = useState(true);
+
+    const seg = useSegments();
+    useEffect(() => {
+        if (seg.length === 1) setToday(true);
+        else setToday(false);
+    }, [seg]);
+
     return (
-        <View
-            style={[
-                styles.header,
-                isToday ? styles.headerToday : styles.headerCalendar,
-            ]}
-        >
-            <TouchableOpacity
-                onPress={() => {
-                    router.push("/");
-                    setToday(true);
-                }}
+        <View style={styles.wrapper}>
+            <View
+                style={[
+                    styles.header,
+                    isToday ? styles.headerToday : styles.headerCalendar,
+                ]}
             >
-                <View style={[styles.btn, isToday && styles.btnActive]}>
-                    <Text style={[styles.text, isToday && styles.btnActive]}>
-                        Today
-                    </Text>
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-                onPress={() => {
-                    router.push("/calendar");
-                    setToday(false);
-                }}
-            >
-                <View style={[styles.btn, !isToday && styles.btnActive]}>
-                    <Text style={[styles.text, !isToday && styles.btnActive]}>
-                        Calendar
-                    </Text>
-                </View>
-            </TouchableOpacity>
+                <Pressable
+                    onPress={() => {
+                        router.push("/");
+                        setToday(true);
+                    }}
+                >
+                    <View style={[styles.btn, isToday && styles.btnActive]}>
+                        <Text
+                            style={[styles.text, isToday && styles.btnActive]}
+                        >
+                            Today
+                        </Text>
+                    </View>
+                </Pressable>
+                <Pressable
+                    onPress={() => {
+                        router.push("/calendar");
+                        setToday(false);
+                    }}
+                >
+                    <View style={[styles.btn, !isToday && styles.btnActive]}>
+                        <Text
+                            style={[styles.text, !isToday && styles.btnActive]}
+                        >
+                            Calendar
+                        </Text>
+                    </View>
+                </Pressable>
+            </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    header: {
+    wrapper: {
         flex: 0.8,
         flexDirection: "row",
         alignItems: "flex-end",
+    },
+    header: {
+        flexDirection: "row",
+        flex: 1,
+        paddingTop: 20,
         gap: 10,
-        marginBottom: 10,
         paddingHorizontal: 20,
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
     },
     headerToday: {
         backgroundColor: "transparent",

@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 20,
-        marginTop: 10,
+        marginTop: 20,
         marginBottom: 30,
     },
     day: {
