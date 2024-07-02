@@ -6,8 +6,8 @@ const TaskItem = () => {
             <Text style={styles.title}>Todays Task</Text>
             <ScrollView>
                 <View style={styles.item}></View>
-                <View style={styles.item}></View>
-                <View style={styles.item}></View>
+                <View style={styles.item2}></View>
+                <View style={styles.item3}></View>
             </ScrollView>
         </View>
     );
@@ -30,7 +30,19 @@ const styles = StyleSheet.create({
     },
     item: {
         height: 180,
-        backgroundColor: "#D9D9D9",
+        backgroundColor: "#E4B875",
+        borderRadius: 20,
+        marginBottom: 5,
+    },
+    item2: {
+        height: 180,
+        backgroundColor: "#B0BBBC",
+        borderRadius: 20,
+        marginBottom: 5,
+    },
+    item3: {
+        height: 180,
+        backgroundColor: "#9CCBC9",
         borderRadius: 20,
         marginBottom: 5,
     },

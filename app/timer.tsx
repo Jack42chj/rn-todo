@@ -1,18 +1,19 @@
+import BackBtn from "@/components/backBtn";
 import StopModal from "@/components/stopModal";
 import { useEffect, useRef, useState } from "react";
 import {
     ImageBackground,
+    Pressable,
     StyleSheet,
     Text,
     TextInput,
     View,
 } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
-const image = { uri: "./assets/images/bg.jpg" };
+const image = { uri: "../assets/images/bg.jpg" };
 
 const Timer = () => {
-    const [timer, setTimer] = useState(1500);
+    const [timer, setTimer] = useState(15);
     const [active, setActive] = useState(false);
     const [pause, setPause] = useState(false);
     const [modal, setModal] = useState(false);
@@ -64,13 +65,13 @@ const Timer = () => {
         const getSeconds = `0${timer % 60}`.slice(-2);
         const minutes = Math.floor(timer / 60);
         const getMinutes = `0${minutes}`.slice(-2);
-
         return `${getMinutes}:${getSeconds}`;
     };
 
     return (
         <View style={styles.container}>
             <ImageBackground source={image} style={styles.image}>
+                <BackBtn />
                 <TextInput
                     placeholder="작업을 입력하세요..."
                     placeholderTextColor="#454545"
@@ -82,32 +83,48 @@ const Timer = () => {
                     <Text style={styles.time}>{formatTime()}</Text>
                 </View>
                 {!active && !pause ? (
-                    <TouchableOpacity
+                    <Pressable
                         onPress={handleStart}
                         style={styles.btnStartView}
                     >
+                        <View style={styles.btnStartimg}>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="#000000"
+                                viewBox="0 0 24 24"
+                                strokeWidth="1.5"
+                                stroke="currentColor"
+                                className="size-6"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z"
+                                />
+                            </svg>
+                        </View>
                         <Text style={styles.btnText}>시작하기</Text>
-                    </TouchableOpacity>
+                    </Pressable>
                 ) : (
                     <>
                         {active ? (
-                            <TouchableOpacity
+                            <Pressable
                                 onPress={handleStart}
                                 style={styles.btnStopView}
                             >
                                 <Text style={[styles.btnText, styles.btnStop]}>
                                     일시정지
                                 </Text>
-                            </TouchableOpacity>
+                            </Pressable>
                         ) : (
                             <View style={styles.btnBox}>
-                                <TouchableOpacity
+                                <Pressable
                                     style={[styles.btnStartView, styles.btnPad]}
                                     onPress={handleContinue}
                                 >
                                     <Text style={styles.btnText}>계속</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
+                                </Pressable>
+                                <Pressable
                                     style={[styles.btnStopView, styles.btnPad]}
                                     onPress={() => setModal(true)}
                                 >
@@ -116,7 +133,7 @@ const Timer = () => {
                                     >
                                         정지
                                     </Text>
-                                </TouchableOpacity>
+                                </Pressable>
                             </View>
                         )}
                     </>
@@ -169,6 +186,9 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         borderWidth: 1,
         borderColor: "#ffffff",
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 10,
     },
     btnStopView: {
         paddingHorizontal: 24,
@@ -176,6 +196,10 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         borderWidth: 1,
         borderColor: "#ffffff",
+    },
+    btnStartimg: {
+        width: 24,
+        height: 24,
     },
     btnText: {
         fontSize: 16,

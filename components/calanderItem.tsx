@@ -33,7 +33,7 @@ const CalanderItem = () => {
                         </View>
                     ))}
                 </ScrollView>
-                <ScrollView>
+                <ScrollView contentContainerStyle={styles.task}>
                     <View style={styles.item}></View>
                     <View style={styles.item}></View>
                     <View style={styles.item}></View>
@@ -57,8 +57,11 @@ const styles = StyleSheet.create({
         backgroundColor: "#f6f6f6",
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
+        flexDirection: "column",
     },
-    month: {},
+    month: {
+        padding: 10,
+    },
     box: {
         width: SCREEN_WIDTH,
         justifyContent: "center",
@@ -67,6 +70,11 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 24,
         fontWeight: 600,
+    },
+    task: {
+        marginTop: 10,
+        flex: 1,
+        flexDirection: "column",
     },
     item: {
         height: 180,

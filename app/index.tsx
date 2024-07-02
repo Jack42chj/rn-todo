@@ -5,7 +5,7 @@ import TimerBtn from "@/components/timerBtn";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 
-export default function App() {
+const App = () => {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
@@ -15,7 +15,7 @@ export default function App() {
             <TimerBtn />
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -24,3 +24,5 @@ const styles = StyleSheet.create({
         fontFamily: "Pretendard",
     },
 });
+
+export default App;

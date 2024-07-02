@@ -6,7 +6,7 @@ const StopModal: React.FC<{
     onStop: () => void;
 }> = ({ visible, onCancel, onStop }) => {
     return (
-        <Modal transparent={true} visible={visible}>
+        <Modal transparent={true} visible={visible} animationType="fade">
             <View style={styles.container}>
                 <View style={styles.modalView}>
                     <Text style={styles.textTitle}>정지 하시겠습니까?</Text>

@@ -1,31 +1,23 @@
 import { useRouter } from "expo-router";
-import {
-    ImageBackground,
-    Pressable,
-    StyleSheet,
-    Text,
-    View,
-} from "react-native";
+import { ImageBackground, Pressable, StyleSheet, Text } from "react-native";
 
-const image = { uri: "./assets/images/bg.jpg" };
+const image = require("../assets/images/bg.jpg");
 
 const TimerBtn = () => {
     const router = useRouter();
     return (
-        <View>
-            <Pressable
-                style={styles.container}
-                onPress={() => router.push("/timer")}
+        <Pressable
+            style={styles.container}
+            onPress={() => router.push("/timer")}
+        >
+            <ImageBackground
+                source={image}
+                style={styles.image}
+                resizeMode="cover"
             >
-                <ImageBackground
-                    source={image}
-                    style={styles.image}
-                    resizeMode="cover"
-                >
-                    <Text style={styles.time}>25</Text>
-                </ImageBackground>
-            </Pressable>
-        </View>
+                <Text style={styles.time}>25</Text>
+            </ImageBackground>
+        </Pressable>
     );
 };
 

@@ -8,7 +8,7 @@ const HeadItem = () => {
 
     const seg = useSegments();
     useEffect(() => {
-        if (seg.length === 1) setToday(true);
+        if (seg.length === 0) setToday(true);
         else setToday(false);
     }, [seg]);
 
