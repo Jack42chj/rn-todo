@@ -85,8 +85,4 @@ rn-todo
 
 ## 🏖️ 미리보기 (Preview)
 
-![home](https://github.com/Jack42chj/rn-todo/assets/86552441/158ae500-5954-4f31-9264-86f4ae424421)
-![timer1](https://github.com/Jack42chj/rn-todo/assets/86552441/5f20fe1f-c7e3-4c38-a6a5-a40405b61364)
-![timer2](https://github.com/Jack42chj/rn-todo/assets/86552441/0d75d0ee-86ae-4d44-881d-c903ae86d589)
-![timer3](https://github.com/Jack42chj/rn-todo/assets/86552441/f7b7a52e-6917-4f8b-9d56-c6f10d0420ba)
-![timer4](https://github.com/Jack42chj/rn-todo/assets/86552441/c58adc28-2206-427b-aa6a-9125aefb4142)
+![preview](https://github.com/Jack42chj/rn-todo/assets/86552441/421d91fa-b4ef-454d-b052-e29febd53da5)
