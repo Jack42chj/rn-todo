@@ -1,1 +1,92 @@
-# 포모도로 기법 To Do List
+# ⏱️ 집중력 향상을 위한 포모도로 기법 타이머
+
+![description](https://github.com/Jack42chj/rn-todo/assets/86552441/12c8b6cf-9375-4bd5-9110-18d064369de7)
+
+- 포모도로 기법은 Francesco Cirillo가 1980년대 후반, 그가 대학생이었던 시절에 개발한 것으로 25분간의 업무 시간과 그사이에 짧은 휴식을 두어 집중력을 극대화하는 기법입니다.
+- 해당 기법을 활용한 타이머를 React Native로 만들어 집중력을 높이고 일의 효율성을 증가합니다.
+
+## 🗓️ 기간(Period)
+
+**2024.06.26 ~ 현재 진행중**
+
+## 📚 기술 스택(Stacks)
+
+### 🛣️ 개발 환경(Environment)
+
+<div>
+  <img src="https://img.shields.io/badge/VisualStudioCode-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white">
+  <img src="https://img.shields.io/badge/Github-181717?style=for-the-badge&logo=github&logoColor=white">
+  <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white">
+</div>
+
+### 💫 Config
+
+<div>
+  <img src="https://img.shields.io/badge/Yarn-2C8EBB?style=for-the-badge&logo=yarn&logoColor=white">
+  <img src="https://img.shields.io/badge/expo-000020?style=for-the-badge&logo=expo&logoColor=white">
+</div>
+
+### 🛠️ 개발 기술(Development)
+
+<div>
+  <img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
+  <img src="https://img.shields.io/badge/ReactNative-61DAFB?style=for-the-badge&logo=react&logoColor=white">
+</div>
+
+### 🪄 디자인(Design)
+
+<div>
+  <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">
+</div>
+
+---
+
+## 📂 디렉토리 구조(Directory Structure)
+
+```bash
+rn-todo
+├─ .gitignore
+├─ app
+│  ├─ (tabs)
+│  │  ├─ calendar.tsx
+│  │  ├─ index.tsx
+│  │  ├─ timer.tsx
+│  │  └─ _layout.tsx
+│  ├─ +html.tsx
+│  └─ _layout..tsx
+├─ app.json
+├─ assets
+│  ├─ fonts
+│  └─ images
+│     ├─ bg.jpg
+│     └─ favicon.png
+├─ babel.config.js
+├─ components
+│  ├─ backBtn.tsx
+│  ├─ calendarItem.tsx
+│  ├─ dateItem.tsx
+│  ├─ headItem.tsx
+│  ├─ stopModal.tsx
+│  ├─ task.tsx
+│  ├─ taskItem.tsx
+│  └─ timerBtn.tsx
+├─ hooks
+├─ interface
+│  └─ interface.ts
+├─ package.json
+├─ README.md
+├─ scripts
+│  └─ reset-project.js
+├─ tsconfig.json
+├─ utils
+│  └─ timeDiffer.ts
+└─ yarn.lock
+```
+
+## 🏖️ 미리보기 (Preview)
+
+![home](https://github.com/Jack42chj/rn-todo/assets/86552441/158ae500-5954-4f31-9264-86f4ae424421)
+![timer1](https://github.com/Jack42chj/rn-todo/assets/86552441/5f20fe1f-c7e3-4c38-a6a5-a40405b61364)
+![timer2](https://github.com/Jack42chj/rn-todo/assets/86552441/0d75d0ee-86ae-4d44-881d-c903ae86d589)
+![timer3](https://github.com/Jack42chj/rn-todo/assets/86552441/f7b7a52e-6917-4f8b-9d56-c6f10d0420ba)
+![timer4](https://github.com/Jack42chj/rn-todo/assets/86552441/c58adc28-2206-427b-aa6a-9125aefb4142)
