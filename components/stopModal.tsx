@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
         backgroundColor: "rgba(0, 0, 0, 0.5)",
     },
     modalView: {
+        flex: 0.1,
         gap: 20,
         backgroundColor: "#ffffff",
         borderRadius: 10,

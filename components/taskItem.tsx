@@ -1,13 +1,47 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
+import Task from "./task";
+
+const data = [
+    {
+        name: "코딩 테스트 연습",
+        start: "3:00",
+        end: "3:25",
+        st: "PM",
+        ed: "PM",
+    },
+    { name: "휴식", start: "3:25", end: "3:40", st: "PM", ed: "PM" },
+    { name: "프로젝트 코딩", start: "3:40", end: "4:05", st: "PM", ed: "PM" },
+];
+
+const colorList = [
+    "#E4B875",
+    "#B0BBBC",
+    "#9CCBC9",
+    "#C0CB9C",
+    "#BBB2CC",
+    "#CB9CA3",
+];
+
+const GetRandomColor = () => {
+    return colorList[Math.floor(Math.random() * colorList.length)];
+};
 
 const TaskItem = () => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Todays Task</Text>
             <ScrollView>
-                <View style={styles.item}></View>
-                <View style={styles.item2}></View>
-                <View style={styles.item3}></View>
+                {data.map((item) => {
+                    const backgroundColor = GetRandomColor();
+                    return (
+                        <View
+                            style={[styles.item, { backgroundColor }]}
+                            key={item.name}
+                        >
+                            <Task item={item} />
+                        </View>
+                    );
+                })}
             </ScrollView>
         </View>
     );
@@ -30,19 +64,6 @@ const styles = StyleSheet.create({
     },
     item: {
         height: 180,
-        backgroundColor: "#E4B875",
-        borderRadius: 20,
-        marginBottom: 5,
-    },
-    item2: {
-        height: 180,
-        backgroundColor: "#B0BBBC",
-        borderRadius: 20,
-        marginBottom: 5,
-    },
-    item3: {
-        height: 180,
-        backgroundColor: "#9CCBC9",
         borderRadius: 20,
         marginBottom: 5,
     },

@@ -5,7 +5,7 @@ import TimerBtn from "@/components/timerBtn";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 
-const App = () => {
+const MainScreen = () => {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
@@ -25,4 +25,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default App;
+export default MainScreen;

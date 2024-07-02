@@ -1,9 +1,9 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import HeadItem from "@/components/headItem";
-import CalanderItem from "@/components/calanderItem";
+import CalanderItem from "@/components/calendarItem";
 
-const Calendar = () => {
+const CalendarScreren = () => {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
@@ -21,4 +21,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Calendar;
+export default CalendarScreren;

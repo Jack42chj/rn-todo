@@ -1,5 +1,6 @@
 import BackBtn from "@/components/backBtn";
 import StopModal from "@/components/stopModal";
+import { StatusBar } from "expo-status-bar";
 import { useEffect, useRef, useState } from "react";
 import {
     ImageBackground,
@@ -10,9 +11,9 @@ import {
     View,
 } from "react-native";
 
-const image = { uri: "../assets/images/bg.jpg" };
+const image = require("../../assets/images/bg.jpg");
 
-const Timer = () => {
+const TimerScreen = () => {
     const [timer, setTimer] = useState(15);
     const [active, setActive] = useState(false);
     const [pause, setPause] = useState(false);
@@ -70,6 +71,7 @@ const Timer = () => {
 
     return (
         <View style={styles.container}>
+            <StatusBar style="light" />
             <ImageBackground source={image} style={styles.image}>
                 <BackBtn />
                 <TextInput
@@ -88,7 +90,7 @@ const Timer = () => {
                         style={styles.btnStartView}
                     >
                         <View style={styles.btnStartimg}>
-                            <svg
+                            {/* <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="#000000"
                                 viewBox="0 0 24 24"
@@ -101,7 +103,7 @@ const Timer = () => {
                                     strokeLinejoin="round"
                                     d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z"
                                 />
-                            </svg>
+                            </svg> */}
                         </View>
                         <Text style={styles.btnText}>시작하기</Text>
                     </Pressable>
@@ -164,6 +166,7 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         textAlign: "center",
         fontWeight: 600,
+        minWidth: 160,
     },
     timerView: {
         borderWidth: 2,
@@ -217,4 +220,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Timer;
+export default TimerScreen;

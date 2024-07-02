@@ -15,7 +15,7 @@ const monthList = [
     "JUN",
 ];
 
-const CalanderItem = () => {
+const CalenderItem = () => {
     return (
         <View style={styles.container}>
             <View style={styles.wrapper}>
@@ -84,4 +84,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default CalanderItem;
+export default CalenderItem;

@@ -5,7 +5,7 @@ const BackBtn = () => {
     const router = useRouter();
     return (
         <Pressable style={styles.container} onPress={() => router.back()}>
-            <svg
+            {/* <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -18,7 +18,7 @@ const BackBtn = () => {
                     strokeLinejoin="round"
                     d="m19.5 8.25-7.5 7.5-7.5-7.5"
                 />
-            </svg>
+            </svg> */}
         </Pressable>
     );
 };
