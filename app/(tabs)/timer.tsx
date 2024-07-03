@@ -3,6 +3,7 @@ import StopModal from "@/components/stopModal";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useRef, useState } from "react";
 import {
+    Image,
     ImageBackground,
     Pressable,
     StyleSheet,
@@ -10,6 +11,7 @@ import {
     TextInput,
     View,
 } from "react-native";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const image = require("../../assets/images/bg.jpg");
 
@@ -90,20 +92,7 @@ const TimerScreen = () => {
                         style={styles.btnStartView}
                     >
                         <View style={styles.btnStartimg}>
-                            {/* <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="#000000"
-                                viewBox="0 0 24 24"
-                                strokeWidth="1.5"
-                                stroke="currentColor"
-                                className="size-6"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z"
-                                />
-                            </svg> */}
+                            <Ionicons name="play" size={18} color="black" />
                         </View>
                         <Text style={styles.btnText}>시작하기</Text>
                     </Pressable>
@@ -201,8 +190,8 @@ const styles = StyleSheet.create({
         borderColor: "#ffffff",
     },
     btnStartimg: {
-        width: 24,
-        height: 24,
+        width: 18,
+        height: 18,
     },
     btnText: {
         fontSize: 16,

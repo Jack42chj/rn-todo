@@ -54,8 +54,8 @@ const styles = StyleSheet.create({
     },
     minView: {
         backgroundColor: "rgba(0, 0, 0, 0.5)",
-        paddingHorizontal: 20,
-        paddingVertical: 8,
+        paddingHorizontal: 16,
+        paddingVertical: 10,
         borderRadius: 50,
     },
     min: {

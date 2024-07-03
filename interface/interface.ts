@@ -12,3 +12,9 @@ export interface TaskProps {
     st: string;
     ed: string;
 }
+
+export interface TodayProps {
+    isToday: boolean;
+    today: () => void;
+    calendar: () => void;
+}

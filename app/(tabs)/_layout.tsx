@@ -12,14 +12,6 @@ const TabsLayout = () => {
                 }}
             />
             <Tabs.Screen
-                name="calendar"
-                options={{
-                    headerTitle: "calendar page",
-                    headerShown: false,
-                    tabBarStyle: { display: "none" },
-                }}
-            />
-            <Tabs.Screen
                 name="timer"
                 options={{
                     headerTitle: "timer page",
