@@ -3,8 +3,9 @@ import TimerBtn from "@/components/timerBtn";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import CalendarScreren from "./calendar";
-import TodayScreen from "./today";
+import DateItem from "@/components/dateItem";
+import TaskItem from "@/components/taskItem";
+import CalenderItem from "@/components/calendarItem";
 
 const App = () => {
     const [isToday, setToday] = useState(true);
@@ -15,7 +16,14 @@ const App = () => {
         <View style={styles.container}>
             <StatusBar style="auto" />
             <HeaderSelect isToday={isToday} today={today} calendar={calendar} />
-            {isToday ? <TodayScreen /> : <CalendarScreren />}
+            {isToday ? (
+                <>
+                    <DateItem />
+                    <TaskItem />
+                </>
+            ) : (
+                <CalenderItem />
+            )}
             <TimerBtn />
         </View>
     );

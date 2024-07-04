@@ -48,7 +48,6 @@ rn-todo
 ├─ .gitignore
 ├─ app
 │  ├─ (tabs)
-│  │  ├─ calendar.tsx
 │  │  ├─ index.tsx
 │  │  ├─ timer.tsx
 │  │  └─ _layout.tsx
@@ -59,12 +58,14 @@ rn-todo
 │  ├─ fonts
 │  └─ images
 │     ├─ bg.jpg
-│     └─ favicon.png
+│     ├─ favicon.png
+│     └─ play.svg
 ├─ babel.config.js
 ├─ components
 │  ├─ backBtn.tsx
 │  ├─ calendarItem.tsx
 │  ├─ dateItem.tsx
+│  ├─ headerSelect.tsx
 │  ├─ headItem.tsx
 │  ├─ stopModal.tsx
 │  ├─ task.tsx
