@@ -2,7 +2,7 @@ import { TaskProps } from "@/interface/interface";
 import TimeDifference from "@/utils/timeDiffer";
 import { StyleSheet, Text, View } from "react-native";
 
-const Task: React.FC<{
+const TaskContainer: React.FC<{
     item: TaskProps;
 }> = ({ item }) => {
     const difference = TimeDifference(item);
@@ -63,4 +63,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Task;
+export default TaskContainer;

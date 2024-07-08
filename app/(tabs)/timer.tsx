@@ -1,25 +1,27 @@
-import BackBtn from "@/components/backBtn";
-import StopModal from "@/components/stopModal";
+import PrevBtn from "@/components/timer/prevBtn";
+import StopModal from "@/components/timer/stopModal";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useRef, useState } from "react";
 import {
-    Image,
     ImageBackground,
     Pressable,
     StyleSheet,
     Text,
-    TextInput,
     View,
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import * as Notifications from "expo-notifications";
+import InputModal from "@/components/timer/InputModal";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const image = require("../../assets/images/bg.jpg");
 
 const TimerScreen = () => {
-    const [timer, setTimer] = useState(15);
+    const [timer, setTimer] = useState(1500);
     const [active, setActive] = useState(false);
     const [pause, setPause] = useState(false);
-    const [modal, setModal] = useState(false);
+    const [stopModal, setStopModal] = useState(false);
+    const [inputModal, setInputModal] = useState(false);
     const [task, setTask] = useState("");
     const decrement = useRef<NodeJS.Timeout | null>(null);
 
@@ -29,6 +31,8 @@ const TimerScreen = () => {
             decrement.current = null;
             setActive(false);
             setPause(false);
+            setTimer(1500);
+            sendNotify();
         }
     }, [timer]);
 
@@ -61,7 +65,8 @@ const TimerScreen = () => {
         setTimer(1500);
         setActive(false);
         setPause(false);
-        setModal(false);
+        setStopModal(false);
+        setTask("");
     };
 
     const formatTime = () => {
@@ -71,24 +76,54 @@ const TimerScreen = () => {
         return `${getMinutes}:${getSeconds}`;
     };
 
+    const sendNotify = async () => {
+        await Notifications.scheduleNotificationAsync({
+            content: {
+                title: task,
+                body: "작업이 완료되었습니다.",
+                sound: "default",
+                vibrate: [0, 250, 250, 250],
+            },
+            trigger: null,
+        });
+    };
+
+    const onClickTaskCancel = () => {
+        setStopModal(true);
+    };
+
     return (
         <View style={styles.container}>
             <StatusBar style="light" />
             <ImageBackground source={image} style={styles.image}>
-                <BackBtn />
-                <TextInput
-                    placeholder="작업을 입력하세요..."
-                    placeholderTextColor="#454545"
-                    value={task}
-                    onChangeText={setTask}
-                    style={styles.input}
-                />
+                <PrevBtn />
+                {task === "" ? (
+                    <Pressable
+                        onPress={() => setInputModal(true)}
+                        style={styles.input}
+                    >
+                        <Text style={styles.inputText}>
+                            작업을 입력하세요...
+                        </Text>
+                    </Pressable>
+                ) : (
+                    <View style={styles.work}>
+                        <Text>{task}</Text>
+                        <Pressable onPress={onClickTaskCancel}>
+                            <MaterialIcons
+                                name="cancel"
+                                size={22}
+                                color="grey"
+                            />
+                        </Pressable>
+                    </View>
+                )}
                 <View style={styles.timerView}>
                     <Text style={styles.time}>{formatTime()}</Text>
                 </View>
                 {!active && !pause ? (
                     <Pressable
-                        onPress={handleStart}
+                        onPress={() => setInputModal(true)}
                         style={styles.btnStartView}
                     >
                         <View style={styles.btnStartimg}>
@@ -117,7 +152,7 @@ const TimerScreen = () => {
                                 </Pressable>
                                 <Pressable
                                     style={[styles.btnStopView, styles.btnPad]}
-                                    onPress={() => setModal(true)}
+                                    onPress={() => setStopModal(true)}
                                 >
                                     <Text
                                         style={[styles.btnText, styles.btnStop]}
@@ -130,9 +165,15 @@ const TimerScreen = () => {
                     </>
                 )}
                 <StopModal
-                    visible={modal}
-                    onCancel={() => setModal(false)}
+                    visible={stopModal}
+                    onCancel={() => setStopModal(false)}
                     onStop={handleStop}
+                />
+                <InputModal
+                    visible={inputModal}
+                    onCancel={() => setInputModal(false)}
+                    setTask={setTask}
+                    handleStart={handleStart}
                 />
             </ImageBackground>
         </View>
@@ -145,17 +186,21 @@ const styles = StyleSheet.create({
     },
     image: {
         flex: 1,
-        justifyContent: "space-around",
+        justifyContent: "space-evenly",
         alignItems: "center",
     },
     input: {
-        backgroundColor: "#e1e1e1",
-        opacity: 0.8,
+        backgroundColor: "#c5c5c5",
         paddingVertical: 12,
         borderRadius: 30,
+        width: 180,
+        opacity: 0.8,
+    },
+    inputText: {
+        fontSize: 16,
         textAlign: "center",
+        color: "#353535",
         fontWeight: 600,
-        minWidth: 160,
     },
     timerView: {
         borderWidth: 2,
@@ -206,6 +251,15 @@ const styles = StyleSheet.create({
     },
     btnPad: {
         paddingHorizontal: 30,
+    },
+    work: {
+        backgroundColor: "#ffffff",
+        padding: 12,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        width: "95%",
+        borderRadius: 6,
     },
 });
 

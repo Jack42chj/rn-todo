@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-import Task from "./task";
+import TaskContainer from "./taskContainer";
 
 const data = [
     {
@@ -30,19 +30,25 @@ const TaskItem = () => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Todays Task</Text>
-            <ScrollView>
-                {data.map((item) => {
-                    const backgroundColor = GetRandomColor();
-                    return (
-                        <View
-                            style={[styles.item, { backgroundColor }]}
-                            key={item.name}
-                        >
-                            <Task item={item} />
-                        </View>
-                    );
-                })}
-            </ScrollView>
+            {data.length ? (
+                <ScrollView>
+                    {data.map((item) => {
+                        const backgroundColor = GetRandomColor();
+                        return (
+                            <View
+                                style={[styles.item, { backgroundColor }]}
+                                key={item.name}
+                            >
+                                <TaskContainer item={item} />
+                            </View>
+                        );
+                    })}
+                </ScrollView>
+            ) : (
+                <View style={styles.emptyView}>
+                    <Text style={styles.empty}>오늘 할 일을 등록해보세요.</Text>
+                </View>
+            )}
         </View>
     );
 };
@@ -66,6 +72,16 @@ const styles = StyleSheet.create({
         height: 180,
         borderRadius: 20,
         marginBottom: 5,
+    },
+    emptyView: {
+        alignItems: "center",
+        justifyContent: "center",
+        flex: 0.8,
+    },
+    empty: {
+        fontSize: 16,
+        color: "grey",
+        fontWeight: 600,
     },
 });
 

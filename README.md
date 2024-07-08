@@ -62,15 +62,18 @@ rn-todo
 │     └─ play.svg
 ├─ babel.config.js
 ├─ components
-│  ├─ backBtn.tsx
-│  ├─ calendarItem.tsx
-│  ├─ dateItem.tsx
+│  ├─ calendar
+│  │  └─ calendarItem.tsx
 │  ├─ headerSelect.tsx
-│  ├─ headItem.tsx
-│  ├─ stopModal.tsx
-│  ├─ task.tsx
-│  ├─ taskItem.tsx
-│  └─ timerBtn.tsx
+│  ├─ timer
+│  │  ├─ InputModal.tsx
+│  │  ├─ prevBtn.tsx
+│  │  └─ stopModal.tsx
+│  ├─ timerBtn.tsx
+│  └─ today
+│     ├─ dateItem.tsx
+│     ├─ taskContainer.tsx
+│     └─ taskItem.tsx
 ├─ hooks
 ├─ interface
 │  └─ interface.ts

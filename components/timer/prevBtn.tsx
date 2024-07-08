@@ -2,7 +2,7 @@ import { useRouter } from "expo-router";
 import { Pressable, StyleSheet } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-const BackBtn = () => {
+const PrevBtn = () => {
     const router = useRouter();
     return (
         <Pressable style={styles.container} onPress={() => router.back()}>
@@ -22,4 +22,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default BackBtn;
+export default PrevBtn;
