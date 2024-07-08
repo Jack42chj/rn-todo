@@ -12,7 +12,7 @@ import PrevBtn from "@/components/timer/prevBtn";
 import StopModal from "@/components/timer/stopModal";
 import InputModal from "@/components/timer/InputModal";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 
 const image = require("../../assets/images/bg.jpg");
 
@@ -108,7 +108,14 @@ const TimerScreen = () => {
                     </Pressable>
                 ) : (
                     <View style={styles.work}>
-                        <Text>{task}</Text>
+                        <View style={styles.workBox}>
+                            <AntDesign
+                                name="pushpin"
+                                size={18}
+                                color="tomato"
+                            />
+                            <Text style={styles.working}>{task}</Text>
+                        </View>
                         <Pressable onPress={onClickTaskCancel}>
                             <MaterialIcons
                                 name="cancel"
@@ -259,6 +266,16 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         width: "95%",
         borderRadius: 6,
+    },
+    working: {
+        fontSize: 18,
+        fontWeight: "bold",
+    },
+    workBox: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 10,
     },
 });
 
