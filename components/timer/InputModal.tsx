@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { Fontisto } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 
 const data = [
     { name: "코딩" },
@@ -41,7 +41,7 @@ const InputModal: React.FC<{
         handleStart();
     };
     return (
-        <Modal transparent={true} visible={visible} animationType="none">
+        <Modal transparent={true} visible={visible} animationType="fade">
             <Pressable style={styles.container} onPress={onCancel}>
                 <KeyboardAvoidingView
                     behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -49,17 +49,31 @@ const InputModal: React.FC<{
                 >
                     <Pressable style={styles.modalView}>
                         <Text style={styles.textTitle}>작업 추가하기</Text>
-                        <TextInput
-                            returnKeyType="done"
-                            placeholder="오늘 할 일 추가하기..."
-                            placeholderTextColor="#8b8b8b"
-                            style={styles.input}
-                            value={newtask}
-                            onChangeText={setNewTask}
-                            onSubmitEditing={onSubmit}
-                        />
+                        <View style={styles.inputBox}>
+                            <TextInput
+                                returnKeyType="done"
+                                placeholder="오늘 할 일 추가하기..."
+                                placeholderTextColor="#8b8b8b"
+                                style={styles.input}
+                                value={newtask}
+                                onChangeText={setNewTask}
+                                onSubmitEditing={onSubmit}
+                            />
+                            <Pressable onPress={onSubmit}>
+                                <Ionicons
+                                    name="add-circle"
+                                    size={41}
+                                    color="#51a9ed"
+                                />
+                            </Pressable>
+                        </View>
+
                         <View style={styles.recent}>
-                            <Fontisto name="history" size={18} color="black" />
+                            <Fontisto
+                                name="history"
+                                size={18}
+                                color="#ff5445"
+                            />
                             <Text style={styles.recentTask}>최근 내 작업</Text>
                         </View>
                         <ScrollView style={styles.scroll}>
@@ -114,24 +128,19 @@ const styles = StyleSheet.create({
     },
     textTitle: {
         fontSize: 18,
-        fontWeight: 600,
+        fontWeight: "bold",
     },
     textCancel: {
         fontSize: 16,
     },
     input: {
-        width: "95%",
+        width: "85%",
         borderRadius: 999,
         opacity: 0.8,
         paddingVertical: 12,
         paddingLeft: 20,
         fontSize: 16,
-        fontWeight: 600,
         minWidth: 240,
-        shadowColor: "#000",
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.2,
-        shadowRadius: 4,
     },
     recent: {
         flexDirection: "row",
@@ -141,7 +150,7 @@ const styles = StyleSheet.create({
     },
     recentTask: {
         fontSize: 16,
-        fontWeight: 600,
+        color: "#ff5445",
     },
     scroll: {
         width: "100%",
@@ -156,7 +165,13 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        paddingRight: 16,
+        paddingRight: 10,
+    },
+    inputBox: {
+        flexDirection: "row",
+        alignItems: "center",
+        width: "100%",
+        justifyContent: "space-between",
     },
 });
 

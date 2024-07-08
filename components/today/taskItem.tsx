@@ -46,7 +46,7 @@ const TaskItem = () => {
                 </ScrollView>
             ) : (
                 <View style={styles.emptyView}>
-                    <Text style={styles.empty}>오늘 할 일을 등록해보세요.</Text>
+                    <Text style={styles.empty}>오늘 할 일을 등록해보세요</Text>
                 </View>
             )}
         </View>
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         marginLeft: 10,
         fontSize: 16,
-        fontWeight: 500,
+        fontWeight: "bold",
     },
     item: {
         height: 180,
@@ -79,9 +79,9 @@ const styles = StyleSheet.create({
         flex: 0.8,
     },
     empty: {
-        fontSize: 16,
+        fontSize: 18,
         color: "grey",
-        fontWeight: 600,
+        fontWeight: "bold",
     },
 });
 

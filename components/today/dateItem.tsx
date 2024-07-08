@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     },
     day: {
         fontSize: 16,
-        fontWeight: 500,
+        fontWeight: "bold",
     },
     outer: {
         flexDirection: "row",
@@ -82,7 +82,6 @@ const styles = StyleSheet.create({
     },
     date: {
         fontSize: 64,
-        fontWeight: 500,
     },
     time: {
         fontSize: 32,

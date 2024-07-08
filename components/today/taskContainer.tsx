@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 24,
-        fontWeight: 600,
+        fontWeight: "bold",
     },
     wrapper: {
         flexDirection: "row",
@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     },
     min: {
         color: "#d9d9d9",
+        fontWeight: "bold",
     },
 });
 

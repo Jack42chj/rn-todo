@@ -60,22 +60,29 @@ const styles = StyleSheet.create({
         paddingHorizontal: 40,
         paddingVertical: 10,
         borderRadius: 20,
+        justifyContent: "center",
+        alignItems: "center",
     },
     btnPause: {
         backgroundColor: "tomato",
         paddingHorizontal: 40,
         paddingVertical: 10,
         borderRadius: 20,
+        justifyContent: "center",
+        alignItems: "center",
     },
     textTitle: {
         fontSize: 16,
+        fontWeight: "bold",
     },
     textCancel: {
         fontSize: 16,
+        fontWeight: "bold",
     },
     textPause: {
         fontSize: 16,
         color: "#ffffff",
+        fontWeight: "bold",
     },
 });
 

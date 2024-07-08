@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 16,
-        fontWeight: 500,
+        fontWeight: "bold",
     },
     btnActive: { backgroundColor: "#000", color: "#fff" },
 });

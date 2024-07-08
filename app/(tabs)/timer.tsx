@@ -199,8 +199,8 @@ const styles = StyleSheet.create({
     inputText: {
         fontSize: 16,
         textAlign: "center",
-        color: "#353535",
-        fontWeight: 600,
+        color: "#6b6b6b",
+        fontWeight: "bold",
     },
     timerView: {
         borderWidth: 2,
@@ -214,7 +214,6 @@ const styles = StyleSheet.create({
     time: {
         fontSize: 64,
         color: "#ffffff",
-        fontWeight: 100,
     },
     btnStartView: {
         backgroundColor: "#ffffff",
@@ -240,7 +239,7 @@ const styles = StyleSheet.create({
     },
     btnText: {
         fontSize: 16,
-        fontWeight: 600,
+        fontWeight: "bold",
     },
     btnStop: {
         color: "#ffffff",
