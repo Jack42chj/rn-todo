@@ -1,12 +1,12 @@
-import HeaderSelect from "@/components/headerSelect";
-import TimerBtn from "@/components/timerBtn";
 import { StatusBar } from "expo-status-bar";
 import { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
+import * as Notifications from "expo-notifications";
+import HeaderSelect from "@/components/headerSelect";
+import TimerBtn from "@/components/timerBtn";
 import DateItem from "@/components/today/dateItem";
 import TaskItem from "@/components/today/taskItem";
 import CalenderItem from "@/components/calendar/calendarItem";
-import * as Notifications from "expo-notifications";
 
 const App = () => {
     const [isToday, setToday] = useState(true);

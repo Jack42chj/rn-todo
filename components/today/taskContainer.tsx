@@ -1,6 +1,6 @@
+import { StyleSheet, Text, View } from "react-native";
 import { TaskProps } from "@/interface/interface";
 import TimeDifference from "@/utils/timeDiffer";
-import { StyleSheet, Text, View } from "react-native";
 
 const TaskContainer: React.FC<{
     item: TaskProps;

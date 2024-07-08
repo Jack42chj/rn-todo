@@ -1,5 +1,5 @@
-import { TodayProps } from "@/interface/interface";
 import { Text, View, StyleSheet, Pressable } from "react-native";
+import { TodayProps } from "@/interface/interface";
 
 const HeaderSelect: React.FC<TodayProps> = ({ isToday, today, calendar }) => {
     return (

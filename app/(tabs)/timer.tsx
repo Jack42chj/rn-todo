@@ -1,5 +1,3 @@
-import PrevBtn from "@/components/timer/prevBtn";
-import StopModal from "@/components/timer/stopModal";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -9,9 +7,11 @@ import {
     Text,
     View,
 } from "react-native";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import * as Notifications from "expo-notifications";
+import PrevBtn from "@/components/timer/prevBtn";
+import StopModal from "@/components/timer/stopModal";
 import InputModal from "@/components/timer/InputModal";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { MaterialIcons } from "@expo/vector-icons";
 
 const image = require("../../assets/images/bg.jpg");

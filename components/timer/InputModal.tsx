@@ -9,9 +9,9 @@ import {
     KeyboardAvoidingView,
     Platform,
 } from "react-native";
+import { useState } from "react";
 import { Fontisto } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-import { useState } from "react";
 
 const data = [
     { name: "코딩" },

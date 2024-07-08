@@ -1,5 +1,5 @@
-import { useRouter } from "expo-router";
 import { ImageBackground, Pressable, StyleSheet, Text } from "react-native";
+import { useRouter } from "expo-router";
 
 const image = require("../assets/images/bg.jpg");
 
