@@ -89,4 +89,5 @@ rn-todo
 
 ## 🏖️ 미리보기 (Preview)
 
-![preview](https://github.com/Jack42chj/rn-todo/assets/86552441/db5f9854-283f-4a9d-83ee-534e1e2812f9)
+![preview1](https://github.com/Jack42chj/rn-todo/assets/86552441/8fd2fafe-3b46-44f4-afc4-d6cc4489c0dc)
+![preview2](https://github.com/Jack42chj/rn-todo/assets/86552441/0268ebcf-58ef-4086-9936-18a73873db4c)
