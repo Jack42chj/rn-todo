@@ -8,14 +8,28 @@ const StopModal: React.FC<{
     return (
         <Modal transparent={true} visible={visible} animationType="fade">
             <View style={styles.container}>
-                <View style={styles.modalView}>
-                    <Text style={styles.textTitle}>정지 하시겠습니까?</Text>
+                <View style={styles.wrapper}>
+                    <Text style={styles.text}>정지 하시겠습니까?</Text>
                     <View style={styles.btnWrapper}>
-                        <Pressable onPress={onCancel} style={styles.btnCancel}>
-                            <Text style={styles.textCancel}>취소</Text>
+                        <Pressable
+                            onPress={onCancel}
+                            style={[
+                                styles.btnView,
+                                { backgroundColor: "#E5E6E1" },
+                            ]}
+                        >
+                            <Text style={styles.text}>취소</Text>
                         </Pressable>
-                        <Pressable onPress={onStop} style={styles.btnPause}>
-                            <Text style={styles.textPause}>정지</Text>
+                        <Pressable
+                            onPress={onStop}
+                            style={[
+                                styles.btnView,
+                                { backgroundColor: "tomato" },
+                            ]}
+                        >
+                            <Text style={[styles.text, { color: "#ffffff" }]}>
+                                정지
+                            </Text>
                         </Pressable>
                     </View>
                 </View>
@@ -31,21 +45,13 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "rgba(0, 0, 0, 0.5)",
     },
-    modalView: {
+    wrapper: {
         flex: 0.1,
         gap: 20,
         backgroundColor: "#ffffff",
         borderRadius: 10,
         alignItems: "center",
         padding: 20,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5,
     },
     stopText: {
         fontSize: 18,
@@ -55,33 +61,16 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         gap: 10,
     },
-    btnCancel: {
+    btnView: {
+        justifyContent: "center",
+        alignItems: "center",
         backgroundColor: "#E5E6E1",
         paddingHorizontal: 40,
         paddingVertical: 10,
         borderRadius: 20,
-        justifyContent: "center",
-        alignItems: "center",
     },
-    btnPause: {
-        backgroundColor: "tomato",
-        paddingHorizontal: 40,
-        paddingVertical: 10,
-        borderRadius: 20,
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    textTitle: {
+    text: {
         fontSize: 16,
-        fontWeight: "bold",
-    },
-    textCancel: {
-        fontSize: 16,
-        fontWeight: "bold",
-    },
-    textPause: {
-        fontSize: 16,
-        color: "#ffffff",
         fontWeight: "bold",
     },
 });

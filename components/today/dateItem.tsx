@@ -1,26 +1,27 @@
 import { useEffect, useState } from "react";
 import { View, StyleSheet, Text } from "react-native";
 
+const dayNames = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+];
+
 const DateItem = () => {
     const [currentTime, setCurrentTime] = useState(new Date());
 
+    // Get Current Local Time
     useEffect(() => {
         const intervalId = setInterval(() => {
             setCurrentTime(new Date());
         }, 1000);
-
         return () => clearInterval(intervalId);
     }, []);
 
-    const dayNames = [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-    ];
     const dayName = dayNames[currentTime.getDay()];
 
     const month = currentTime.toLocaleString("en-US", { month: "2-digit" });
@@ -35,22 +36,22 @@ const DateItem = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.day}>{dayName}</Text>
-            <View style={styles.outer}>
-                <View style={styles.inner1}>
+            <Text style={[styles.text, { fontWeight: "bold" }]}>{dayName}</Text>
+            <View style={styles.wrapper}>
+                <View style={styles.box1}>
                     <Text style={styles.date}>
                         {month}.{day}
                     </Text>
                     <Text style={styles.date}>{year}</Text>
                 </View>
-                <View style={styles.inner2}>
+                <View style={styles.box2}>
                     <Text style={styles.time}>
                         {displayHours.toLocaleString("en-US", {
                             minimumIntegerDigits: 2,
                         })}
                         :{formattedMinutes} {ampm}
                     </Text>
-                    <Text style={styles.region}>SEOUL</Text>
+                    <Text style={styles.text}>SEOUL</Text>
                 </View>
             </View>
         </View>
@@ -64,18 +65,17 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginBottom: 30,
     },
-    day: {
+    text: {
         fontSize: 16,
-        fontWeight: "bold",
     },
-    outer: {
+    wrapper: {
         flexDirection: "row",
         alignItems: "center",
     },
-    inner1: {
+    box1: {
         flex: 1.4,
     },
-    inner2: {
+    box2: {
         flex: 1,
         borderLeftWidth: 1,
         paddingLeft: 20,
@@ -85,9 +85,6 @@ const styles = StyleSheet.create({
     },
     time: {
         fontSize: 32,
-    },
-    region: {
-        fontSize: 16,
     },
 });
 

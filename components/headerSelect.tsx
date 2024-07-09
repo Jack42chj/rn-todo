@@ -7,11 +7,15 @@ const HeaderSelect: React.FC<TodayProps> = ({ isToday, today, calendar }) => {
             <View
                 style={[
                     styles.header,
-                    isToday ? styles.headerToday : styles.headerCalendar,
+                    isToday
+                        ? { backgroundColor: "tranparent" }
+                        : { backgroundColor: "#fff" },
                 ]}
             >
                 <Pressable onPress={today}>
-                    <View style={[styles.btn, isToday && styles.btnActive]}>
+                    <View
+                        style={[styles.btnWrapper, isToday && styles.btnActive]}
+                    >
                         <Text
                             style={[styles.text, isToday && styles.btnActive]}
                         >
@@ -20,7 +24,12 @@ const HeaderSelect: React.FC<TodayProps> = ({ isToday, today, calendar }) => {
                     </View>
                 </Pressable>
                 <Pressable onPress={calendar}>
-                    <View style={[styles.btn, !isToday && styles.btnActive]}>
+                    <View
+                        style={[
+                            styles.btnWrapper,
+                            !isToday && styles.btnActive,
+                        ]}
+                    >
                         <Text
                             style={[styles.text, !isToday && styles.btnActive]}
                         >
@@ -48,13 +57,7 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
     },
-    headerToday: {
-        backgroundColor: "transparent",
-    },
-    headerCalendar: {
-        backgroundColor: "#fff",
-    },
-    btn: {
+    btnWrapper: {
         cursor: "pointer",
         width: 115,
         height: 50,

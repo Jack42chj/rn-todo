@@ -1,35 +1,27 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-import TaskContainer from "./taskContainer";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { TodoProps } from "@/interface/interface";
+import TaskContainer from "./taskContainer";
+import { TaskProps } from "@/interface/interface";
 import GetCurrentTime from "@/utils/getCurrentTime";
-
-const colorList = [
-    "#E4B875",
-    "#B0BBBC",
-    "#9CCBC9",
-    "#C0CB9C",
-    "#BBB2CC",
-    "#CB9CA3",
-];
-
-const GetRandomColor = () => {
-    return colorList[Math.floor(Math.random() * colorList.length)];
-};
+import GetRandomColor from "@/utils/getRandomColor";
 
 const TaskItem = () => {
-    const [todo, setTodo] = useState<TodoProps[]>([]);
+    const [todo, setTodo] = useState<TaskProps[]>([]);
+
+    // Get Todo List from LocalStorage
     const getTodos = async () => {
-        const key = GetCurrentTime().dateKey;
+        const key = GetCurrentTime().storageKey;
         const res = await AsyncStorage.getItem(key);
         if (res) {
             setTodo(JSON.parse(res));
         }
     };
+
     useEffect(() => {
         getTodos();
     }, []);
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Todays Task</Text>
@@ -39,7 +31,10 @@ const TaskItem = () => {
                         const backgroundColor = GetRandomColor();
                         return (
                             <View
-                                style={[styles.item, { backgroundColor }]}
+                                style={[
+                                    styles.itemWrapper,
+                                    { backgroundColor },
+                                ]}
                                 key={item.name}
                             >
                                 <TaskContainer item={item} />
@@ -48,8 +43,10 @@ const TaskItem = () => {
                     })}
                 </ScrollView>
             ) : (
-                <View style={styles.emptyView}>
-                    <Text style={styles.empty}>오늘 할 일을 등록해보세요</Text>
+                <View style={styles.emptyWrapper}>
+                    <Text style={styles.emptyText}>
+                        오늘 할 일을 등록해보세요
+                    </Text>
                 </View>
             )}
         </View>
@@ -71,17 +68,17 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: "bold",
     },
-    item: {
+    itemWrapper: {
         height: 180,
         borderRadius: 20,
         marginBottom: 5,
     },
-    emptyView: {
+    emptyWrapper: {
         alignItems: "center",
         justifyContent: "center",
         flex: 0.8,
     },
-    empty: {
+    emptyText: {
         fontSize: 18,
         color: "grey",
         fontWeight: "bold",

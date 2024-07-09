@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
-import { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
+import { useState, useEffect } from "react";
 import * as Notifications from "expo-notifications";
 import HeaderSelect from "@/components/headerSelect";
 import TimerBtn from "@/components/timerBtn";

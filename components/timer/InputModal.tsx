@@ -11,8 +11,7 @@ import {
 } from "react-native";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Fontisto } from "@expo/vector-icons";
-import { MaterialIcons, Ionicons } from "@expo/vector-icons";
+import { MaterialIcons, Ionicons, Fontisto } from "@expo/vector-icons";
 
 const InputModal: React.FC<{
     visible: boolean;
@@ -22,6 +21,8 @@ const InputModal: React.FC<{
 }> = ({ visible, onCancel, setTask, handleStart }) => {
     const [newtask, setNewTask] = useState("");
     const [history, setHistory] = useState<{ name: string }[]>([]);
+
+    // Input Box Submit with Done Button
     const onSubmit = () => {
         if (newtask === "") return;
         setTask(newtask);
@@ -30,31 +31,39 @@ const InputModal: React.FC<{
         onCancel();
         handleStart();
     };
+
+    // Select Task from History
     const selectSubmit = (item: string) => {
         setTask(item);
         onCancel();
         handleStart();
     };
+
+    // Save Task to LocalStorage History
     const saveHistory = async (newTask: string) => {
         const newList = [{ name: newTask }, ...history];
         await AsyncStorage.setItem("history", JSON.stringify(newList));
         setHistory(newList);
     };
+
+    // Get Task from LocalStorage History
     const getHistory = async () => {
         const res = await AsyncStorage.getItem("history");
         if (res) {
             setHistory(JSON.parse(res));
         }
     };
+
     useEffect(() => {
         getHistory();
     }, []);
+
     return (
         <Modal transparent={true} visible={visible} animationType="fade">
             <Pressable style={styles.container} onPress={onCancel}>
                 <KeyboardAvoidingView
                     behavior={Platform.OS === "ios" ? "padding" : "height"}
-                    style={styles.kav}
+                    style={styles.wrapper}
                 >
                     <Pressable style={styles.modalView}>
                         <Text style={styles.textTitle}>작업 추가하기</Text>
@@ -125,7 +134,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "rgba(0, 0, 0, 0.5)",
     },
-    kav: {
+    wrapper: {
         width: "100%",
     },
     modalView: {

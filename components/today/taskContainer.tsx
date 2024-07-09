@@ -8,17 +8,19 @@ const TaskContainer: React.FC<{
     const startTime = GetStartTime(item.end + " " + item.ed);
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{item.name}</Text>
+            <Text style={[styles.text, { fontWeight: "bold" }]}>
+                {item.name}
+            </Text>
             <View style={styles.wrapper}>
                 <View style={styles.timeView}>
-                    <Text style={styles.time}>{startTime}</Text>
+                    <Text style={styles.text}>{startTime}</Text>
                     <Text>Start</Text>
                 </View>
                 <View style={styles.minView}>
                     <Text style={styles.min}>25 Min</Text>
                 </View>
                 <View style={styles.timeView}>
-                    <Text style={styles.time}>
+                    <Text style={styles.text}>
                         {item.end} {item.ed}
                     </Text>
                     <Text>End</Text>
@@ -35,9 +37,8 @@ const styles = StyleSheet.create({
         justifyContent: "space-around",
         gap: 20,
     },
-    title: {
+    text: {
         fontSize: 24,
-        fontWeight: "bold",
     },
     wrapper: {
         flexDirection: "row",
@@ -46,9 +47,6 @@ const styles = StyleSheet.create({
     },
     timeView: {
         gap: 5,
-    },
-    time: {
-        fontSize: 24,
     },
     minView: {
         backgroundColor: "rgba(0, 0, 0, 0.5)",

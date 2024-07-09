@@ -66,7 +66,7 @@ rn-todo
 │  │  └─ calendarItem.tsx
 │  ├─ headerSelect.tsx
 │  ├─ timer
-│  │  ├─ InputModal.tsx
+│  │  ├─ inputModal.tsx
 │  │  ├─ prevBtn.tsx
 │  │  └─ stopModal.tsx
 │  ├─ timerBtn.tsx
@@ -83,9 +83,24 @@ rn-todo
 │  └─ reset-project.js
 ├─ tsconfig.json
 ├─ utils
-│  └─ timeDiffer.ts
+│  ├─ getCurrentTime.ts
+│  ├─ getRandomColor.ts
+│  └─ getStartTime.ts
 └─ yarn.lock
 ```
+
+## 🌟 현재 구현 완료된 기능(Specification)
+
+#### ⏲️ 타이머 기능
+
+-   포모도로 기법으로 작업 설정 후 25분간 타이머 작동
+-   타이머 시작, 일시정지, 정지 기능
+-   이전에 진행했던 작업을 관리하는 '내 이전 작업` 로컬 스토리지를 활용해 관리
+
+#### ☀️ 금일 작업 관리
+
+-   25분을 완수한 작업들의 정보를 로컬 스토리지에 저장
+-   홈 화면 Today에서 시작 시간, 종료 시간, 진행한 작업 확인 가능
 
 ## 🏖️ 미리보기 (Preview)
 

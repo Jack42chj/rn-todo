@@ -1,5 +1,4 @@
 import { StatusBar } from "expo-status-bar";
-import { useEffect, useRef, useState } from "react";
 import {
     ImageBackground,
     Pressable,
@@ -7,14 +6,15 @@ import {
     Text,
     View,
 } from "react-native";
+import { useEffect, useRef, useState } from "react";
 import * as Notifications from "expo-notifications";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import GetCurrentTime from "@/utils/getCurrentTime";
 import PrevBtn from "@/components/timer/prevBtn";
 import StopModal from "@/components/timer/stopModal";
 import InputModal from "@/components/timer/InputModal";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import GetCurrentTime from "@/utils/getCurrentTime";
 
 const image = require("../../assets/images/bg.jpg");
 
@@ -40,6 +40,7 @@ const TimerScreen = () => {
         }
     }, [timer]);
 
+    // Timer Count Start
     const handleStart = () => {
         if (!active && !pause) {
             decrement.current = setInterval(() => {
@@ -53,6 +54,7 @@ const TimerScreen = () => {
         }
     };
 
+    // Timer Count Resume
     const handleContinue = () => {
         decrement.current = setInterval(() => {
             setTimer((prev) => prev - 1);
@@ -61,6 +63,7 @@ const TimerScreen = () => {
         setPause(false);
     };
 
+    // Timer Count Stop & Initialization
     const handleStop = () => {
         if (decrement.current !== null) {
             clearInterval(decrement.current);
@@ -73,6 +76,7 @@ const TimerScreen = () => {
         setTask("");
     };
 
+    // Timer Time Count
     const formatTime = () => {
         const getSeconds = `0${timer % 60}`.slice(-2);
         const minutes = Math.floor(timer / 60);
@@ -80,6 +84,7 @@ const TimerScreen = () => {
         return `${getMinutes}:${getSeconds}`;
     };
 
+    // Send Push Alarm
     const sendNotify = async () => {
         await Notifications.scheduleNotificationAsync({
             content: {
@@ -92,9 +97,10 @@ const TimerScreen = () => {
         });
     };
 
+    // Save Task to LocalStorage
     const saveTodos = async () => {
         const currentTime = GetCurrentTime();
-        const key = currentTime.dateKey;
+        const key = currentTime.storageKey;
         const existingData = await AsyncStorage.getItem(key);
         let todos = [];
         if (existingData) {
@@ -112,6 +118,7 @@ const TimerScreen = () => {
         await AsyncStorage.setItem(key, JSON.stringify(data));
     };
 
+    // Stop & Delete Current Working Task
     const onClickTaskCancel = () => {
         setStopModal(true);
     };
@@ -124,21 +131,21 @@ const TimerScreen = () => {
                 {task === "" ? (
                     <Pressable
                         onPress={() => setInputModal(true)}
-                        style={styles.input}
+                        style={styles.inputBox}
                     >
-                        <Text style={styles.inputText}>
+                        <Text style={styles.placeholder}>
                             작업을 입력하세요...
                         </Text>
                     </Pressable>
                 ) : (
-                    <View style={styles.work}>
-                        <View style={styles.workBox}>
+                    <View style={styles.outerRowBox}>
+                        <View style={styles.innerRowBox}>
                             <AntDesign
                                 name="pushpin"
                                 size={18}
                                 color="tomato"
                             />
-                            <Text style={styles.working}>{task}</Text>
+                            <Text style={styles.task}>{task}</Text>
                         </View>
                         <Pressable onPress={onClickTaskCancel}>
                             <MaterialIcons
@@ -157,9 +164,7 @@ const TimerScreen = () => {
                         onPress={() => setInputModal(true)}
                         style={styles.btnStartView}
                     >
-                        <View style={styles.btnStartimg}>
-                            <Ionicons name="play" size={18} color="black" />
-                        </View>
+                        <Ionicons name="play" size={18} color="black" />
                         <Text style={styles.btnText}>시작하기</Text>
                     </Pressable>
                 ) : (
@@ -220,17 +225,36 @@ const styles = StyleSheet.create({
         justifyContent: "space-evenly",
         alignItems: "center",
     },
-    input: {
+    inputBox: {
         backgroundColor: "#c5c5c5",
         paddingVertical: 12,
         borderRadius: 30,
         width: 180,
         opacity: 0.8,
     },
-    inputText: {
+    placeholder: {
         fontSize: 16,
         textAlign: "center",
         color: "#6b6b6b",
+        fontWeight: "bold",
+    },
+    outerRowBox: {
+        backgroundColor: "#ffffff",
+        padding: 12,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        width: "95%",
+        borderRadius: 6,
+    },
+    innerRowBox: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 10,
+    },
+    task: {
+        fontSize: 18,
         fontWeight: "bold",
     },
     timerView: {
@@ -281,25 +305,6 @@ const styles = StyleSheet.create({
     },
     btnPad: {
         paddingHorizontal: 30,
-    },
-    work: {
-        backgroundColor: "#ffffff",
-        padding: 12,
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        width: "95%",
-        borderRadius: 6,
-    },
-    working: {
-        fontSize: 18,
-        fontWeight: "bold",
-    },
-    workBox: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: 10,
     },
 });
 

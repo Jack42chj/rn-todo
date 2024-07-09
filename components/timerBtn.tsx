@@ -12,10 +12,10 @@ const TimerBtn = () => {
         >
             <ImageBackground
                 source={image}
-                style={styles.image}
+                style={styles.bgImage}
                 resizeMode="cover"
             >
-                <Text style={styles.time}>25</Text>
+                <Text style={styles.btnText}>25</Text>
             </ImageBackground>
         </Pressable>
     );
@@ -32,20 +32,15 @@ const styles = StyleSheet.create({
         borderRadius: 40,
         overflow: "hidden",
         zIndex: 999,
-        shadowColor: "#000",
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.2,
-        shadowRadius: 4,
-        elevation: 4,
     },
-    image: {
+    bgImage: {
         width: "100%",
         height: "100%",
         justifyContent: "center",
         alignItems: "center",
         borderRadius: 999,
     },
-    time: {
+    btnText: {
         fontSize: 32,
         color: "#d9d9d9",
     },
