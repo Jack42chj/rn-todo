@@ -1,17 +1,9 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import TaskContainer from "./taskContainer";
-
-const data = [
-    {
-        name: "코딩 테스트 연습",
-        start: "3:00",
-        end: "3:25",
-        st: "PM",
-        ed: "PM",
-    },
-    { name: "휴식", start: "3:25", end: "3:40", st: "PM", ed: "PM" },
-    { name: "프로젝트 코딩", start: "3:40", end: "4:05", st: "PM", ed: "PM" },
-];
+import { useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { TodoProps } from "@/interface/interface";
+import GetCurrentTime from "@/utils/getCurrentTime";
 
 const colorList = [
     "#E4B875",
@@ -27,12 +19,23 @@ const GetRandomColor = () => {
 };
 
 const TaskItem = () => {
+    const [todo, setTodo] = useState<TodoProps[]>([]);
+    const getTodos = async () => {
+        const key = GetCurrentTime().dateKey;
+        const res = await AsyncStorage.getItem(key);
+        if (res) {
+            setTodo(JSON.parse(res));
+        }
+    };
+    useEffect(() => {
+        getTodos();
+    }, []);
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Todays Task</Text>
-            {data.length ? (
+            {todo.length ? (
                 <ScrollView>
-                    {data.map((item) => {
+                    {todo.map((item) => {
                         const backgroundColor = GetRandomColor();
                         return (
                             <View

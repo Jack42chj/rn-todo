@@ -1,23 +1,21 @@
 import { StyleSheet, Text, View } from "react-native";
 import { TaskProps } from "@/interface/interface";
-import TimeDifference from "@/utils/timeDiffer";
+import GetStartTime from "@/utils/getStartTime";
 
 const TaskContainer: React.FC<{
     item: TaskProps;
 }> = ({ item }) => {
-    const difference = TimeDifference(item);
+    const startTime = GetStartTime(item.end + " " + item.ed);
     return (
         <View style={styles.container}>
             <Text style={styles.title}>{item.name}</Text>
             <View style={styles.wrapper}>
                 <View style={styles.timeView}>
-                    <Text style={styles.time}>
-                        {item.start} {item.st}
-                    </Text>
+                    <Text style={styles.time}>{startTime}</Text>
                     <Text>Start</Text>
                 </View>
                 <View style={styles.minView}>
-                    <Text style={styles.min}>{difference} Min</Text>
+                    <Text style={styles.min}>25 Min</Text>
                 </View>
                 <View style={styles.timeView}>
                     <Text style={styles.time}>

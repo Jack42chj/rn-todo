@@ -13,6 +13,8 @@ import StopModal from "@/components/timer/stopModal";
 import InputModal from "@/components/timer/InputModal";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import GetCurrentTime from "@/utils/getCurrentTime";
 
 const image = require("../../assets/images/bg.jpg");
 
@@ -32,7 +34,9 @@ const TimerScreen = () => {
             setActive(false);
             setPause(false);
             setTimer(1500);
+            saveTodos();
             sendNotify();
+            setTask("");
         }
     }, [timer]);
 
@@ -86,6 +90,26 @@ const TimerScreen = () => {
             },
             trigger: null,
         });
+    };
+
+    const saveTodos = async () => {
+        const currentTime = GetCurrentTime();
+        const key = currentTime.dateKey;
+        const existingData = await AsyncStorage.getItem(key);
+        let todos = [];
+        if (existingData) {
+            todos = JSON.parse(existingData);
+        }
+        const data = [
+            {
+                date: key,
+                name: task,
+                end: `${currentTime.displayHours}:${currentTime.minutes}`,
+                ed: currentTime.ampm,
+            },
+            ...todos,
+        ];
+        await AsyncStorage.setItem(key, JSON.stringify(data));
     };
 
     const onClickTaskCancel = () => {

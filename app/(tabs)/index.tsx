@@ -20,12 +20,14 @@ const App = () => {
             shouldSetBadge: false,
         }),
     });
+
     const isNotify = async () => {
         const { status } = await Notifications.requestPermissionsAsync();
         if (status !== "granted") {
-            alert("알림 권한이 거부되었습니다!");
+            alert("Alarm Event Access Denied!");
         }
     };
+
     useEffect(() => {
         isNotify();
     }, []);

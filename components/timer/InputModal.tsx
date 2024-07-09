@@ -9,17 +9,10 @@ import {
     KeyboardAvoidingView,
     Platform,
 } from "react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Fontisto } from "@expo/vector-icons";
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
-
-const data = [
-    { name: "코딩" },
-    { name: "휴식" },
-    { name: "코딩테스트 연습" },
-    { name: "휴식" },
-    { name: "코딩" },
-];
 
 const InputModal: React.FC<{
     visible: boolean;
@@ -28,9 +21,11 @@ const InputModal: React.FC<{
     handleStart: () => void;
 }> = ({ visible, onCancel, setTask, handleStart }) => {
     const [newtask, setNewTask] = useState("");
+    const [history, setHistory] = useState<{ name: string }[]>([]);
     const onSubmit = () => {
         if (newtask === "") return;
         setTask(newtask);
+        saveHistory(newtask);
         setNewTask("");
         onCancel();
         handleStart();
@@ -40,6 +35,20 @@ const InputModal: React.FC<{
         onCancel();
         handleStart();
     };
+    const saveHistory = async (newTask: string) => {
+        const newList = [{ name: newTask }, ...history];
+        await AsyncStorage.setItem("history", JSON.stringify(newList));
+        setHistory(newList);
+    };
+    const getHistory = async () => {
+        const res = await AsyncStorage.getItem("history");
+        if (res) {
+            setHistory(JSON.parse(res));
+        }
+    };
+    useEffect(() => {
+        getHistory();
+    }, []);
     return (
         <Modal transparent={true} visible={visible} animationType="fade">
             <Pressable style={styles.container} onPress={onCancel}>
@@ -76,24 +85,32 @@ const InputModal: React.FC<{
                             />
                             <Text style={styles.recentTask}>최근 내 작업</Text>
                         </View>
-                        <ScrollView style={styles.scroll}>
-                            {data.map((item, i) => (
-                                <Pressable
-                                    style={styles.scrollView}
-                                    key={i}
-                                    onPress={() => selectSubmit(item.name)}
-                                >
-                                    <Text style={styles.task}>{item.name}</Text>
-                                    <Pressable>
-                                        <MaterialIcons
-                                            name="cancel"
-                                            size={22}
-                                            color="grey"
-                                        />
+                        {history.length ? (
+                            <ScrollView style={styles.scroll}>
+                                {history.map((item, i) => (
+                                    <Pressable
+                                        style={styles.scrollView}
+                                        key={i}
+                                        onPress={() => selectSubmit(item.name)}
+                                    >
+                                        <Text style={styles.task}>
+                                            {item.name}
+                                        </Text>
+                                        <Pressable>
+                                            <MaterialIcons
+                                                name="cancel"
+                                                size={22}
+                                                color="grey"
+                                            />
+                                        </Pressable>
                                     </Pressable>
-                                </Pressable>
-                            ))}
-                        </ScrollView>
+                                ))}
+                            </ScrollView>
+                        ) : (
+                            <Text style={styles.nowork}>
+                                등록된 작업이 없습니다
+                            </Text>
+                        )}
                     </Pressable>
                 </KeyboardAvoidingView>
             </Pressable>
@@ -172,6 +189,11 @@ const styles = StyleSheet.create({
         alignItems: "center",
         width: "100%",
         justifyContent: "space-between",
+    },
+    nowork: {
+        color: "grey",
+        fontSize: 16,
+        marginVertical: 10,
     },
 });
 
