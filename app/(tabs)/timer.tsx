@@ -12,7 +12,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import GetCurrentTime from "@/utils/getCurrentTime";
 import PrevBtn from "@/components/timer/prevBtn";
 import StopModal from "@/components/timer/stopModal";
-import InputModal from "@/components/timer/InputModal";
+import InputModal from "@/components/timer/inputModal";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 

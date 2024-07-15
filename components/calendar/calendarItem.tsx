@@ -1,4 +1,6 @@
+import GetRandomColor from "@/utils/getRandomColor";
 import { Dimensions, ScrollView, StyleSheet, Text, View } from "react-native";
+import CalendarTask from "./calendarTask";
 
 const monthList = [
     "JUL",
@@ -14,6 +16,8 @@ const monthList = [
     "MAY",
     "JUN",
 ];
+
+const todo = ["ㅁㄴㅇ"];
 
 const CalenderItem = () => {
     return (
@@ -33,11 +37,30 @@ const CalenderItem = () => {
                         </View>
                     ))}
                 </ScrollView>
-                <ScrollView contentContainerStyle={styles.task}>
-                    <View style={styles.item}></View>
-                    <View style={styles.item}></View>
-                    <View style={styles.item}></View>
-                </ScrollView>
+                {todo.length ? (
+                    <ScrollView>
+                        {todo.map((item) => {
+                            const backgroundColor = GetRandomColor();
+                            return (
+                                <View
+                                    style={[
+                                        styles.itemWrapper,
+                                        { backgroundColor },
+                                    ]}
+                                    key={item}
+                                >
+                                    <CalendarTask />
+                                </View>
+                            );
+                        })}
+                    </ScrollView>
+                ) : (
+                    <View style={styles.emptyWrapper}>
+                        <Text style={styles.emptyText}>
+                            진행된 일정이 없습니다
+                        </Text>
+                    </View>
+                )}
             </View>
         </View>
     );
@@ -81,6 +104,21 @@ const styles = StyleSheet.create({
         backgroundColor: "#BBB2CC",
         borderRadius: 20,
         marginBottom: 5,
+    },
+    itemWrapper: {
+        height: 180,
+        borderRadius: 20,
+        marginBottom: 5,
+    },
+    emptyWrapper: {
+        alignItems: "center",
+        justifyContent: "center",
+        flex: 5,
+    },
+    emptyText: {
+        fontSize: 18,
+        color: "grey",
+        fontWeight: "bold",
     },
 });
 

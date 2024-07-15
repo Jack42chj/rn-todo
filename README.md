@@ -89,7 +89,7 @@ rn-todo
 └─ yarn.lock
 ```
 
-## 🌟 현재 구현 완료된 기능(Specification)
+## 🌟 현재 구현이 완료된 기능(Specification)
 
 #### ⏲️ 타이머 기능
 
